@@ -1,0 +1,4 @@
+nick_home_bt:
+  name: Nick home BT sensors
+  initial: off
+  icon: mdi:home

@@ -1,0 +1,184 @@
+##### LIGHTS #####
+
+- id: '1528226129740'
+  alias: Lights on arrive
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.side_door
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+    - condition: state
+      entity_id: sensor.current_activity
+      state: PowerOff
+    # - condition: template
+      # value_template: >-
+        # {% set val = now() %}
+        # {{ ((as_timestamp(val) - as_timestamp(states.group.nick_tracker.last_changed))/60) < 10 }}
+  action:
+  #- alias: ''
+  - data:
+      entity_id: light.corner
+    service: light.turn_on
+  - data:
+      entity_id: light.bedroom
+    service: light.turn_on
+
+- alias: Light Brightness
+  trigger:
+    - platform: event
+      event_type: state_changed
+  condition:
+    condition: and
+    conditions:
+        # - condition: state
+          # entity_id: group.trackers
+          # state: 'home'
+        - condition: template
+          value_template: "{{ trigger.event.data is not none }}"
+        - condition: template
+          value_template: "{{ trigger.event.data.entity_id is not none }}"
+        - condition: or
+          conditions:
+            - condition: template
+              value_template: "{{ trigger.event.data.entity_id == 'light.corner' }}"
+            - condition: template
+              value_template: "{{ trigger.event.data.entity_id == 'light.lamp' }}"
+            - condition: template
+              value_template: "{{ trigger.event.data.entity_id == 'light.left' }}"
+            - condition: template
+              value_template: "{{ trigger.event.data.entity_id == 'light.right' }}"
+            - condition: template
+              value_template: "{{ trigger.event.data.entity_id == 'light.bedroom' }}"
+            - condition: template
+              value_template: "{{ trigger.event.data.entity_id == 'light.accent' }}"
+        - condition: template
+          value_template: "{{ trigger.event.data.new_state.state == 'on' }}"
+        - condition: template
+          value_template: "{{ trigger.event.data.old_state.state == 'off' }}"
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: "{{ trigger.event.data.entity_id }}"
+        brightness_pct: >
+          {% set hour=states("sensor.time").split(':')[0] | int %}
+          {%- if hour >= 6 and hour < 8  -%}
+            40
+          {%- elif hour >= 8 and hour <18  -%}
+            80
+          {%- elif hour >= 18 and hour <23  -%}
+            30
+          {%- else -%}
+            20
+          {%- endif %}
+
+##### SYSTEM #####
+          
+- id: 'SSL expiry notification'
+  alias: 'SSL expiry notification'
+  trigger: 
+    platform: numeric_state
+    entity_id: sensor.ssl_cert_expiry
+    below: 30
+  action:
+    service: persistent_notification.create
+    data:
+      message: "Warning - SSL certificate expires in less than 30 days and has not been renewed"
+
+- alias: Empty Log File
+  initial_state: 'on'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.homeassistantlog
+    above: 5
+    #value_template: "{{ states.sensor.log_file_size.state | int > 4 }}"
+    #value_template: "{{ states.sensor.homeassistantlog.state | int > 4 }}"
+  action:
+    - service: script.turn_on
+      entity_id: script.clear_log
+
+##### ARRIVAL / DEPARTURE #####
+      
+- alias: Door Chime
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.side_door
+  # condition:
+    # - condition: state
+      # entity_id: group.trackers
+      # state: 'home'
+  action:
+    - service: media_player.play_media
+      data_template:
+        entity_id: media_player.living_room_home
+        media_content_id: >
+          {% if trigger.to_state.state == 'on' %}
+          http://192.168.1.177:8123/local/sounds/seinfeld_transition.mp3
+          {% else %}
+          # Do Nothing
+          {% endif %}
+        media_content_type: audio/mp3
+      
+- alias: Nick BT Home
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.nick_home_confidence
+      above: 10
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: input_boolean.nick_home_bt
+        
+- alias: Nick BT Away
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.nick_home_confidence
+      below: 10
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: input_boolean.nick_home_bt
+      
+##### MISC #####
+      
+- alias: Harmony
+  hide_entity: True
+  trigger:
+    platform: state
+    entity_id: input_select.harmony
+    from: 'Select Input'
+  action:
+    - service: remote.turn_on
+      entity_id: remote.harmonyhub
+      data_template:
+        activity: >
+          {% if is_state("input_select.harmony", "Xbox One") %}
+            35362019
+          {% elif is_state("input_select.harmony", "Pi") %}
+            24659606
+          {% elif is_state("input_select.harmony", "Watch TV") %}
+            35361964
+          {% elif is_state("input_select.harmony", "PS4") %}
+            35363529
+          {% elif is_state("input_select.harmony", "Power Off") %}
+            -1
+          {% else %}
+          {% endif %}
+    - service: input_select.select_option
+      entity_id: input_select.harmony
+      data_template:
+        option: "Select Input"
+        
+# - alias: Update MQTT sensors on startup
+  # trigger:
+    # - platform: homeassistant
+      # event: start
+  # action:
+    # - service: mqtt.publish
+      # data:
+        # topic: "monitor/scan/restart"

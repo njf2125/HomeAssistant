@@ -1,0 +1,12 @@
+Harmony:
+  entities:
+    - sensor.current_activity
+    - input_select.harmony
+
+GoogleHome:
+  name: Google Home
+  entities:
+    - media_player.house
+    - media_player.living_room_home
+    - media_player.bedroom_home
+    - media_player.office_speaker

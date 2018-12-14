@@ -1,0 +1,12 @@
+switch.Hallway:
+  friendly_name: Hallway
+  icon: mdi:lightbulb
+switch.Kitchen:
+  friendly_name: Kitchen
+  icon: mdi:lightbulb
+switch.Christmas_tree:
+  friendly_name: Christmas tree
+  icon: mdi:pine-tree
+switch.Outdoor_Plug:
+  friendly_name: Outdoor Plug
+  icon: mdi:power-plug

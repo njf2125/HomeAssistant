@@ -1,0 +1,240 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret home_lat
+  longitude: !secret home_long
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/New_York
+  # Customization file
+  customize: !include_dir_merge_named customize
+  whitelist_external_dirs:
+    - /home/homeassistant/.homeassistant
+
+system_log:
+  max_entries: 100
+
+logger:
+  default: error
+  logs:
+    pychromecast: fatal
+    homeassistant.components.media_player.cast: fatal
+    homeassistant.core: info
+
+recorder:
+  db_url: mysql://homeassistant:icemat@192.168.1.137/homeassistant?charset=utf8
+  purge_keep_days: 3
+  purge_interval: 1
+  exclude:
+    entities:
+      - binary_sensor.front_door_camera__front_yard_activity
+      - binary_sensor.front_door_camera__stoop_activity
+      - binary_sensor.front_door_camera_motion_detected
+      - sun.sun
+    domains:
+      - device_tracker
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+  javascript_version: latest
+  themes: !include themes.yaml
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  api_password: !secret http_password
+#  ssl_certificate: /etc/letsencrypt/live/fignacious.duckdns.org/fullchain.pem
+#  ssl_key: /etc/letsencrypt/live/fignacious.duckdns.org/privkey.pem
+#  base_url: ha.fignacious.duckdns.org
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+group: !include_dir_merge_named groups
+
+#remote:
+#  - platform: harmony
+#    name: HarmonyHub
+#    host: 192.168.1.157
+
+sensor: !include_dir_merge_list sensors
+binary_sensor: !include binary_sensors.yaml
+
+input_select:
+  harmony:
+    name: Harmony Control
+    options:
+      - Select Input
+      - Watch TV
+      - Pi
+      - Xbox One
+      - PS4
+      - Power Off
+    icon: mdi:monitor
+
+google:
+  client_id: 426737386922-hgm3ig8ohie9naugv8ldv5j25gjm8mul.apps.googleusercontent.com
+  client_secret: !secret google_client_secret
+
+mqtt:
+  broker: 192.168.1.177
+  port: 1883
+  username: homeassistant
+  password: !secret mqtt_password
+  discovery: true
+  discovery_prefix: smartthings
+
+switch:
+  - platform: mqtt
+    name: Kitchen
+    command_topic: "smartthings/Kitchen/switch"
+    state_topic: "smartthings/Kitchen/switch"
+    payload_on: "on"
+    payload_off: "off"
+    retain: true
+
+  - platform: mqtt
+    name: Hallway
+    command_topic: "smartthings/Hallway/switch"
+    state_topic: "smartthings/Hallway/switch"
+    payload_on: "on"
+    payload_off: "off"
+    retain: true
+    
+  - platform: mqtt
+    name: Outdoor Plug
+    command_topic: "smartthings/Outdoor Plug/switch"
+    state_topic: "smartthings/Outdoor Plug/switch"
+    payload_on: "on"
+    payload_off: "off"
+    retain: true
+    
+camera:
+  - platform: generic
+    still_image_url: 'https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=LTX&brand=wui&num=6&delay=15&type=N0R&frame=0&scale=1.000&noclutter=0&showstorms=0&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=1&lightning=0&smooth=0&rand=25525009&lat=0&lon=0&label=you'
+    name: Radar WU ILM
+
+lock:
+  - platform: mqtt
+    name: Side door lock
+    command_topic: "smartthings/Side door lock/lock"
+    state_topic: "smartthings/Side door lock/lock"
+    payload_lock: "locked"
+    payload_unlock: "unlocked"
+    retain: true
+#    optimistic: true
+
+device_tracker:
+  - platform: unifi
+    host: 192.168.1.137
+    username: hass
+    password: !secret unifi_password
+    verify_ssl: false
+    interval_seconds: 30
+    consider_home: 180
+
+  - platform: nmap_tracker
+    track_new_devices: no
+    interval_seconds: 30
+    hosts: 
+      - 192.168.1.199
+      - 192.168.1.76
+      - 192.168.1.109
+      
+  # - platform: google_maps
+    # username: ni272790
+    # password: !secret alt_gmail_password
+    
+  # - platform: googlehome
+    # host: 192.168.1.132
+    # track_new_devices: no
+    
+  # - platform: googlehome
+    # host: 192.168.1.133
+    # track_new_devices: no
+    
+  # - platform: googlehome
+    # host: 192.168.1.134
+    # track_new_devices: no
+
+nest:
+  #client_id: 94c8134b-1c94-46c8-a234-f16d15e4a876
+  client_id: 1aac713f-6cff-443f-812e-b02e82ad50e5
+  client_secret: !secret nest_client_secret_2
+
+weather:
+  - platform: yweather
+  - platform: darksky
+    api_key: ef56d89f8f48ddddc6da974f93d72b77
+    mode: daily
+    name: Forecast
+
+light:
+  - platform: group
+    name: Fan Lights
+    entities:
+      - light.fan_1
+      - light.fan_2
+      - light.fan_3
+  - platform: group
+    name: Living Room
+    entities:
+      - light.fan
+      - light.corner
+      #- light.lamp
+
+ffmpeg:
+
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+# cloud:
+
+shell_command:
+#  renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
+  empty_log: truncate -s 0 /home/homeassistant/.homeassistant/home-assistant.log
+
+zone:
+  - name: Work
+    latitude: !secret work_lat
+    longitude: !secret work_long
+    radius: 100
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+input_boolean: !include input_boolean.yaml

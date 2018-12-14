@@ -1,0 +1,66 @@
+
+- cal_id: nickfigliolia@gmail.com
+  entities:
+  - device_id: personal
+    name: Personal
+    track: true
+
+- cal_id: 5hr9hn762dcoqdlfct540khps8@group.calendar.google.com
+  entities:
+  - device_id: events
+    name: Events
+    track: true
+
+- cal_id: nfl_23_%50ittsburgh+%53teelers#sports@group.v.calendar.google.com
+  entities:
+  - device_id: pittsburgh_steelers
+    name: Pittsburgh Steelers
+    track: true
+
+- cal_id: nhl_16_%50ittsburgh+%50enguins#sports@group.v.calendar.google.com
+  entities:
+  - device_id: pittsburgh_penguins
+    name: Pittsburgh Penguins
+    track: true
+
+- cal_id: qiv5pj49ne3tsomno7iu915n83ch3aap@import.calendar.google.com
+  entities:
+  - device_id: calendar
+    ignore_availability: true
+    name: Work
+    track: true
+
+- cal_id: rl1ihi4htobmkang4gh8u0s81s@group.calendar.google.com
+  entities:
+  - device_id: shared
+    ignore_availability: true
+    name: Shared
+    track: false
+
+- cal_id: family14809286567706926928@group.calendar.google.com
+  entities:
+  - device_id: family
+    ignore_availability: true
+    name: Family
+    track: false
+
+- cal_id: maddyk106@gmail.com
+  entities:
+  - device_id: gmail
+    ignore_availability: true
+    name: gmail
+    track: false
+
+- cal_id: '#contacts@group.v.calendar.google.com'
+  entities:
+  - device_id: contacts
+    ignore_availability: true
+    name: Contacts
+    track: false
+
+- cal_id: en.usa#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: holidays_in_united_states
+    ignore_availability: true
+    name: Holidays in United States
+    track: false

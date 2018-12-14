@@ -1,0 +1,47 @@
+default_view:
+  view: yes
+  icon: mdi:home
+  entities: 
+    - group.trackers
+    - group.sidedoor
+#    - lock.side_door_lock
+    - group.weather
+    - group.nest
+    - group.schedule
+    - sensor.nick_bedroom
+    - sensor.nick_living_room
+
+lights:
+  view: yes
+  icon: mdi:lightbulb
+  entities:
+    - group.otherlights
+    - group.Bedroom
+    - group.LivingRoom
+
+crypto:
+  view: no
+  icon: mdi:coins
+  entities:
+    - group.prices
+    - group.wallet
+
+media:
+  view: yes
+  icon: mdi:library-music
+  entities:
+    - group.harmony
+    - group.googlehome
+
+security:
+  view: yes
+  icon: mdi:video
+  entities:
+    - group.nestcams
+
+sysmon:
+  view: yes
+  icon: mdi:monitor
+  entities:
+    - group.server
+    - group.devices

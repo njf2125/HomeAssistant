@@ -1,0 +1,46 @@
+nick_tracker:
+  # - device_tracker.google_maps_112822771153071455968
+  - device_tracker.nick
+  
+Weather:
+  entities:
+    - sensor.dark_sky_temperature
+    - sensor.dark_sky_overnight_low_temperature
+    - sensor.dark_sky_daytime_high_temperature
+  #  - sensor.dark_sky_precip_probability
+    - sensor.dark_sky_summary
+  #  - weather.dark-sky
+    - camera.radar_wu_ilm
+
+Nest:
+  entities:
+#    - climate.family_room
+    - sensor.family_room_thermostat_temperature
+#    - sensor.family_room_thermostat_target
+    - sensor.family_room_thermostat_humidity
+#    - binary_sensor.family_room_thermostat_fan
+    - sensor.family_room_thermostat_hvac_state
+#    - sensor.family_room_thermostat_operation_mode
+    - binary_sensor.hallway_nest_protect_online
+#    - sensor.hallway_nest_protect_co_status 
+#    - sensor.hallway_nest_protect_smoke_status
+
+SideDoor:
+  entities:
+    - binary_sensor.side_door
+    - lock.side_door_lock
+    - sensor.side_door_lock_battery
+
+Schedule:
+  entities:
+    - sensor.event_title
+    - sensor.event_start
+    - sensor.event_end
+
+Trackers:
+  - group.nick_tracker
+  
+Automations:
+  control: hidden
+  entities:
+    - automation.lights_on_arrive

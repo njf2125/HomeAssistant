@@ -1,0 +1,6 @@
+NestCams:
+  name: Nest Cameras
+  entities:
+    - camera.living_room
+    - camera.front_door
+

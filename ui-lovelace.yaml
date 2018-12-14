@@ -1,0 +1,145 @@
+resources:
+  - url: /local/custom_ui/weather-card.js?v=0.0.5
+    type: js
+  - url: /local/custom_ui/fold-entity-row.js?v=0.0.5
+    type: js
+  - url: /local/custom_ui/slider-entity-row.js?v=0.0.5
+    type: js
+    
+views:
+  - title: Home
+    icon: mdi:home
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities: 
+              - group.nick_tracker
+              # - sensor.family_room_thermostat_temperature
+              # - sensor.family_room_thermostat_hvac_state
+              - binary_sensor.side_door
+              - sensor.side_door_lock_battery
+              - lock.side_door_lock
+          # - type: entities
+            # entities:
+              # - type: custom:fold-entity-row
+                # head: light.living_room
+                # group_config:
+                  # icon: mdi:lightbulb
+                # items:
+                  # - entity: light.fan
+                    # type: custom:slider-entity-row
+                  # - entity: light.corner
+                    # type: custom:slider-entity-row
+                  # - entity: light.lamp
+                    # type: custom:slider-entity-row
+              # - type: custom:fold-entity-row
+                # head: light.bedroom
+                # group_config:
+                  # icon: mdi:lightbulb
+                # items:
+                  # - entity: light.bedroom
+                    # name: Night Stands
+                    # type: custom:slider-entity-row
+                  # - entity: light.left
+                    # name: Left Side
+                    # type: custom:slider-entity-row
+                  # - entity: light.right
+                    # name: Right Side
+                    # type: custom:slider-entity-row
+              # - type: custom:slider-entity-row
+                # entity: light.front_door
+              # - entity: switch.kitchen
+              # - entity: switch.hallway
+              # - type: custom:fold-entity-row
+                # head: group.christmas
+                # items:
+                  # - entity: switch.christmas_tree
+                  # - entity: switch.outdoor_plug
+              # - entity: switch.christmas_tree
+              # - entity: switch.outdoor_plug
+          - type: thermostat
+            entity: climate.family_room
+      - type: vertical-stack
+        cards:
+          - type: weather-forecast
+            entity: weather.forecast
+          # - type: iframe
+            # url: https://embed.windy.com/embed2.html?lat=34.157&lon=-77.914&zoom=7&level=surface&overlay=radar&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=35.782&detailLon=-70.093&metricWind=default&metricTemp=default&radarRange=-1
+            # aspect_ratio: 75%
+          - type: picture-glance
+            camera_image: camera.radar_wu_ilm
+            entities: 
+              - camera.radar_wu_ilm
+  - title: Lights
+    icon: mdi:lightbulb
+    cards:
+      - type: entities
+        title: Living Room
+        entities:
+          - type: custom:fold-slider-entity-row
+            entity: light.fan
+          - type: custom:slider-entity-row
+            entity: light.corner
+          - type: custom:slider-entity-row
+            entity: light.lamp
+      - type: entities
+        title: Bedroom
+        entities:
+          - type: custom:slider-entity-row
+            name: Night Stands
+            entity: light.bedroom
+          - entity: light.left
+            name: Left Side
+            type: custom:slider-entity-row
+          - entity: light.right
+            name: Right Side
+            type: custom:slider-entity-row
+      - type: entities
+        title: Other Lighting
+        show_header_toggle: false
+        entities:
+          - entity: light.front_door
+            type: custom:slider-entity-row
+          - switch.hallway
+          - switch.kitchen
+          - switch.outdoor_plug
+          - switch.christmas_tree
+  - title: Security
+    icon: mdi:cctv
+    cards:
+      - type: picture-glance
+        title: Living Room
+        entities:
+          - light.fan
+          - light.corner
+        camera_image: camera.living_room
+      - type: picture-glance
+        title: Front Door
+        entities:
+          - light.front_door
+          - binary_sensor.front_door_camera_person_detected
+        camera_image: camera.front_door
+  - title: Systems
+    icon: mdi:monitor
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - sensor.fastcom_download
+              - sensor.ssl_cert_expiry
+              - sensor.homeassistantlog
+              - sensor.pihole_ads_blocked_today
+          - type: entities
+            entities:
+              - automation.lights_on_arrive
+              - automation.door_chime
+      - type: entities
+        entities:
+          - sensor.nestindoor
+          - sensor.nesthello
+          - sensor.nickdesktop
+          - sensor.harmonyhub
+          - sensor.smartthingshub
+          - sensor.unifiap

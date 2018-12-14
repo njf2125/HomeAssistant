@@ -1,0 +1,147 @@
+### Weather
+sensor.dark_sky_temperature:
+  friendly_name: Current Temp
+sensor.dark_sky_daytime_high_temperature:
+  friendly_name: Today's High
+sensor.dark_sky_overnight_low_temperature:
+  friendly_name: Today's Low
+# sensor.dark_sky_minutely_summary:
+  # friendly_name: Hourly Summary
+# sensor.dark_sky_hourly_summary:
+  # friendly_name: Daily Summary
+# sensor.yr_symbol:
+  # friendly_name: Forecast
+sensor.dark_sky_precip_probability:
+  friendly_name: Percent chance of rain
+  icon: mdi:weather-rainy
+sensor.dark_sky_summary:
+  friendly_name: Summary
+
+### Environment
+sensor.family_room_thermostat_temperature:
+  friendly_name: Temperature
+  entity_picture: /local/nest.png
+sensor.family_room_thermostat_target:
+  friendly_name: Target Temperature
+  icon: mdi:thermometer
+sensor.family_room_thermostat_humidity:
+  friendly_name: Humidity
+  icon: mdi:water-percent
+climate.family_room:
+  entity_picture: /local/nest.png
+sensor.family_room_thermostat_hvac_state:
+  friendly_name: HVAC State
+  icon: mdi:thermostat
+sensor.family_room_thermostat_operation_mode:
+  friendly_name: Mode
+  icon: mdi:thermostat
+binary_sensor.family_room_thermostat_fan:
+  friendly_name: Fan
+  icon: mdi:fan
+binary_sensor.hallway_nest_protect_online:
+  friendly_name: Nest Protect
+  icon: mdi:smoke-detector
+sensor.hallway_nest_protect_co_status:
+  friendly_name: CO2 Status
+  icon: mdi:smoke-detector
+sensor.hallway_nest_protect_smoke_status:
+  friendly_name: Smoke Status
+  icon: mdi:smoke-detector
+
+### Crypto
+sensor.ethereum:
+  friendly_name: ETH
+sensor.omisego:
+  friendly_name: OMG
+sensor.request_network:
+  friendly_name: REQ
+sensor.iota:
+  friendly_name: IOTA
+sensor.stellar:
+  friendly_name: XLM
+sensor.vechain:
+  friendly_name: VET
+sensor.eth_balance:
+#  friendly_name: ETH
+  entity_picture: /local/eth.png
+sensor.omg_balance:
+#  friendly_name: OMG
+  entity_picture: /local/omg.png
+sensor.req_balance:
+#  friendly_name: REQ
+  entity_picture: /local/req.png
+sensor.eth_value:
+  entity_picture: /local/eth.png
+sensor.omg_value:
+  entity_picture: /local/omg.png
+sensor.req_value:
+  entity_picture: /local/req.png
+sensor.total_value:
+  icon: mdi:currency-usd
+
+### Devices
+group.nick_tracker:
+  friendly_name: Nick
+  entity_picture: /local/nick.jpg
+sensor.current_activity:
+  entity_picture: /local/harmony.png
+sensor.harmonyhub:
+  entity_picture: /local/harmony.png
+sensor.smartthingshub:
+  entity_picture: /local/smartthings.png
+sensor.unifiap:
+  entity_picture: /local/ubiquiti.png
+sensor.nestindoor:
+  entity_picture: /local/nestindoor.png
+sensor.nesthello:
+  entity_picture: /local/nesthello.png
+sensor.nickdesktop:
+  icon: mdi:windows
+  #entity.picture: /local/win.png
+sensor.side_door_lock_battery:
+  icon: mdi:battery
+  unit_of_measurement: '%'
+binary_sensor.side_door:
+  icon: mdi:door
+  friendly_name: Side door
+
+### Media
+# sensor.plex:
+  # icon: mdi:plex
+  # friendly_name: Plex
+# media_player.plex_chrome:
+  # icon: mdi:plex
+  # friendly_name: Plex
+# media_player.kodi_openeleclocal:
+  # icon: mdi:kodi
+  # friendly_name: Kodi
+
+### Calendar
+sensor.event_title:
+  icon: mdi:calendar
+sensor.event_start:
+  icon: mdi:clock-start
+sensor.event_end:
+  icon: mdi:clock-end
+
+sensor.server_cpu_load:
+  unit_of_measurement: '%'
+sensor.drivepool_free:
+  friendly_name: Drivepool Free Space
+  icon: mdi:harddisk
+sensor.drivepool_use_percent:
+  friendly_name: Drivepool Used
+  icon: mdi:harddisk
+sensor.server_use_percent:
+  friendly_name: Server HD Used
+  icon: mdi:harddisk
+sensor.ssl_cert_expiry:
+  friendly_name: SSL Cert Expires in
+  unit_of_measurement: 'days'
+  icon: mdi:certificate
+sensor.log_file_size:
+  friendly_name: HA Log File Size
+  icon: mdi:file
+sensor.homeassistantlog:
+  friendly_name: HA Log File Size
+  icon: mdi:file

@@ -1,0 +1,18 @@
+Prices:
+  entities:
+    - sensor.ethereum
+    - sensor.omisego
+    - sensor.request_network
+    - sensor.vechain
+    - sensor.iota
+    - sensor.stellar
+
+Wallet:
+  entities:
+    - sensor.total_value
+    - sensor.eth_balance
+    - sensor.eth_value
+    - sensor.omg_balance
+    - sensor.omg_value
+    - sensor.req_balance
+    - sensor.req_value

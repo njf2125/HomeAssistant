@@ -1,0 +1,25 @@
+- platform: template
+  sensors:
+    event_title:
+      entity_id: calendar.personal
+      friendly_name: 'Next Event'
+      value_template: "{{ states.calendar.personal.attributes.message }}"
+
+#    event_description:
+#      friendly_name: 'Description'
+#      value_template: "{{ states.calendar.personal.attributes.description }}"
+
+    event_allday:
+      entity_id: calendar.personal
+      friendly_name: 'All Day?'
+      value_template: "{{ states.calendar.personal.attributes.all_day }}"
+
+    event_start:
+      entity_id: calendar.personal
+      friendly_name: 'Start Time'       
+      value_template: "{{ as_timestamp(states.calendar.personal.attributes.start_time) | timestamp_custom('%D %-I:%M %P') }}"
+
+    event_end:
+      entity_id: calendar.personal
+      friendly_name: 'End Time'
+      value_template: "{{ as_timestamp(states.calendar.personal.attributes.end_time) | timestamp_custom('%D %-I:%M %P') }}"

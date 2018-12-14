@@ -1,0 +1,31 @@
+- platform: glances
+  name: Server
+  host: 192.168.1.137
+  resources:
+      - 'disk_use_percent'
+      #- 'disk_use'
+      #- 'disk_free'
+      - 'memory_use_percent'
+      #- 'memory_use'
+      #- 'memory_free'
+      - 'processor_load'
+      #- 'process_running'
+      #- 'process_thread'
+      #- 'process_total'
+      #- 'process_sleeping'
+      #- 'cpu_temp'
+# - platform: rest
+  # resource: http://192.168.1.137:61208/api/2/fs
+  # name: Drivepool_free
+  # value_template: '{{ value_json[1].free| multiply(0.000000001)| round(1) }}'
+  # unit_of_measurement: GB
+# - platform: rest
+  # resource: http://192.168.1.137:61208/api/2/fs
+  # name: Drivepool_use_percent
+  # value_template: '{{ value_json[1].percent }}'
+  # unit_of_measurement: '%'
+# - platform: rest
+  # resource: http://192.168.1.137:61208/api/2/fs
+  # name: Server_use_percent
+  # value_template: '{{ value_json[0].percent }}'
+  # unit_of_measurement: '%'

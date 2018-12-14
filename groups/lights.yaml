@@ -1,0 +1,29 @@
+Bedroom:
+  entities:
+    - light.bedroom
+    - light.left
+    - light.right
+
+LivingRoom:
+  name: Living Room
+  entities:
+    - light.fan_lights
+    - light.fan_1
+    - light.fan_2
+    - light.fan_3
+    - light.corner
+   #- light.lamp
+
+OtherLights:
+  name: Others
+  entities:
+    - switch.Hallway
+    - switch.Kitchen
+    - light.front_porch
+
+Christmas:
+  name: Christmas
+  icon: mdi:pine-tree
+  entities:
+    - switch.outdoor_plug
+    - switch.christmas_tree

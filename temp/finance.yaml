@@ -1,0 +1,50 @@
+- platform: coinmarketcap
+  currency_id: 1027
+  display_currency: USD
+- platform: coinmarketcap
+  currency_id: 1808
+  display_currency: USD
+- platform: coinmarketcap
+  currency_id: 2071
+  display_currency: USD
+- platform: coinmarketcap
+  currency_id: 3077
+  display_currency: USD
+- platform: coinmarketcap
+  currency_id: 1720
+  display_currency: USD
+- platform: coinmarketcap
+  currency_id: 512
+  display_currency: USD
+- platform: etherscan
+  address: '0xdad989719fEE3FD86946667d7834eA69487580bf'
+- platform: etherscan
+  address: '0xdad989719fEE3FD86946667d7834eA69487580bf'
+  token: OMG
+- platform: etherscan
+  address: '0xdad989719fEE3FD86946667d7834eA69487580bf'
+  token: REQ
+- platform: template
+  sensors:
+    eth_value:
+      friendly_name: ETH Value
+      unit_of_measurement: 'USD'
+      value_template: "{{ (states.sensor.ethereum.state | float * states.sensor.eth_balance.state | float) | round(2) }}"
+- platform: template
+  sensors:
+    omg_value:
+      friendly_name: OMG Value
+      unit_of_measurement: 'USD'
+      value_template: "{{ (states.sensor.omisego.state | float * states.sensor.omg_balance.state | float) | round(2) }}"
+- platform: template
+  sensors:
+    req_value:
+      friendly_name: REQ Value
+      unit_of_measurement: 'USD'
+      value_template: "{{ (states.sensor.request_network.state | float * states.sensor.req_balance.state | float) | round(2) }}"
+- platform: template
+  sensors:
+    total_value:
+      friendly_name: Portfolio Value
+      unit_of_measurement: 'USD'
+      value_template: "{{ (states.sensor.eth_value.state | float + states.sensor.req_value.state | float + states.sensor.omg_value.state | float) | round(2) }}"

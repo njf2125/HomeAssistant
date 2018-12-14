@@ -1,0 +1,55 @@
+- platform: template
+  sensors:
+    harmonyhub:
+      entity_id: device_tracker.harmonyhub
+      value_template: '{% if is_state("device_tracker.harmonyhub", "home") %}Online{% else %}Offline{% endif %}'
+      friendly_name: 'Harmony Hub'
+
+- platform: template
+  sensors:
+    smartthingshub:
+      entity_id: device_tracker.st24FD5B00000065B2
+      value_template: '{% if is_state("device_tracker.st24FD5B00000065B2", "home") %}Online{% else %}Offline{% endif %}'
+      friendly_name: 'SmartThings Hub'
+
+- platform: template
+  sensors:
+    unifiap:
+      entity_id: device_tracker.788a208668e9
+      value_template: '{% if is_state("device_tracker.788a208668e9", "home") %}Online{% else %}Offline{% endif %}'
+      friendly_name: 'Unifi AP'
+
+- platform: template
+  sensors:
+    nestindoor:
+      entity_id: device_tracker.nest3057
+      value_template: '{% if is_state("device_tracker.nest3057", "home") %}Online{% else %}Offline{% endif %}'
+      friendly_name: 'Nest Indoor Camera'
+
+- platform: template
+  sensors:
+    nesthello:
+      entity_id: device_tracker.nesthello
+      value_template: '{% if is_state("device_tracker.nesthello", "home") %}Online{% else %}Offline{% endif %}'
+      friendly_name: 'Nest Hello'
+
+- platform: template
+  sensors:
+    nickdesktop:
+      entity_id: device_tracker.nickdesktop
+      value_template: '{% if is_state("device_tracker.nickdesktop", "home") %}Online{% else %}Offline{% endif %}'
+      friendly_name: 'Desktop PC'
+
+- platform: fastdotcom
+
+- platform: command_line
+  name: SSL cert expiry
+  unit_of_measurement: days
+  scan_interval: 21600
+  command: "ssl-cert-check -b -c /etc/letsencrypt/live/ha.fignacious.duckdns.org/cert.pem | awk '{ print $NF }'"
+
+- platform: mqtt
+  name: Side door lock battery
+  state_topic: "smartthings/Side door lock/battery"
+  retain: true
+

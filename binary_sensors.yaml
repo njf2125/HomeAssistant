@@ -1,0 +1,16 @@
+- platform: mqtt
+  name: Side Door
+  state_topic: "smartthings/Side Door/contact"
+  payload_on: "open"
+  payload_off: "closed"
+  device_class: door
+  retain: true
+  
+- platform: template
+  sensors:
+    nick_occupancy:
+      device_class: presence
+      value_template: >-
+        {{ is_state('device_tracker.nick', 'home')
+            or states('sensor.nick_bedroom')|float > 9
+            or states('sensor.nick_living_room')|float > 9 }}

@@ -1,0 +1,66 @@
+# - platform: command_line
+  # name: log_file_size
+  # command: "du -k /home/homeassistant/.homeassistant/home-assistant.log | cut -f1"
+  # unit_of_measurement: 'KB'
+  # value_template: '{{ value }}'
+
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+    - 'date_time'
+    - 'time_date'
+    
+- platform: filesize
+  file_paths:
+    - /home/homeassistant/.homeassistant/home-assistant.log
+    
+- platform: pi_hole
+  host: 192.168.1.177:81
+  
+- platform: pi_hole
+  host: 192.168.1.178
+  
+- platform: mqtt
+  state_topic: 'monitor/bedroom/b0:2a:43:fb:e0:0a'
+  value_template: '{{ value_json.confidence }}'
+  unit_of_measurement: '%'
+  name: 'Nick Bedroom'
+  
+- platform: mqtt
+  state_topic: 'monitor/bedroom/status'
+  name: 'Bedroom Monitor Status'
+  
+- platform: mqtt
+  state_topic: 'monitor/living room/b0:2a:43:fb:e0:0a'
+  value_template: '{{ value_json.confidence }}'
+  unit_of_measurement: '%'
+  name: 'Nick Living Room'
+  
+- platform: mqtt
+  state_topic: 'monitor/living room/status'
+  name: 'Living Room Monitor Status'
+
+- platform: min_max
+  name: "Nick Home Confidence"
+  type: mean
+  round_digits: 0
+  entity_ids:
+    - sensor.nick_bedroom
+    - sensor.nick_living_room
+  
+# - platform: rest
+  # resource: http://192.168.1.137:61208/api/2/fs
+  # name: Drivepool_free
+  # value_template: '{{ value_json[1].free| multiply(0.000000001)| round(1) }}'
+  # unit_of_measurement: GB
+# - platform: rest
+  # resource: http://192.168.1.137:61208/api/2/fs
+  # name: Drivepool_use_percent
+  # value_template: '{{ value_json[1].percent }}'
+  # unit_of_measurement: '%'
+# - platform: rest
+  # resource: http://192.168.1.137:61208/api/2/fs
+  # name: Server_use_percent
+  # value_template: '{{ value_json[0].percent }}'
+  # unit_of_measurement: '%'

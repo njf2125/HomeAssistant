@@ -1,0 +1,18 @@
+Server:
+  entities:
+    - sensor.fastcom_download
+    #- sensor.server_cpu_load
+    #- sensor.server_ram_used
+    #- sensor.server_use_percent
+    #- sensor.drivepool_use_percent
+    - sensor.ssl_cert_expiry
+    - sensor.homeassistantlog
+
+Devices:
+  entities:
+    - sensor.nestindoor
+    - sensor.nesthello
+    - sensor.nickdesktop
+    - sensor.harmonyhub
+    - sensor.smartthingshub
+    - sensor.unifiap
