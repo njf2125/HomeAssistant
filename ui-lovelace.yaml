@@ -77,7 +77,7 @@ views:
       - type: entities
         title: Living Room
         entities:
-          - type: custom:fold-slider-entity-row
+          - type: custom:slider-entity-row
             entity: light.fan
           - type: custom:slider-entity-row
             entity: light.corner
