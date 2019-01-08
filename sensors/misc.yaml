@@ -14,12 +14,6 @@
 - platform: filesize
   file_paths:
     - /home/homeassistant/.homeassistant/home-assistant.log
-    
-- platform: pi_hole
-  host: 192.168.1.177:81
-  
-- platform: pi_hole
-  host: 192.168.1.178
   
 - platform: mqtt
   state_topic: 'monitor/bedroom/b0:2a:43:fb:e0:0a'

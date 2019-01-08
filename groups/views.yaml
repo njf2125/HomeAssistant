@@ -19,12 +19,12 @@ lights:
     - group.Bedroom
     - group.LivingRoom
 
-crypto:
-  view: no
-  icon: mdi:coins
-  entities:
-    - group.prices
-    - group.wallet
+# crypto:
+  # view: no
+  # icon: mdi:coins
+  # entities:
+    # - group.prices
+    # - group.wallet
 
 media:
   view: yes

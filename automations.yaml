@@ -2,6 +2,7 @@
 
 - id: '1528226129740'
   alias: Lights on arrive
+  initial_state: on
   trigger:
   - platform: state
     entity_id: binary_sensor.side_door

@@ -130,7 +130,7 @@ views:
               - sensor.fastcom_download
               - sensor.ssl_cert_expiry
               - sensor.homeassistantlog
-              - sensor.pihole_ads_blocked_today
+              #- sensor.pihole_ads_blocked_today
           - type: entities
             entities:
               - automation.lights_on_arrive

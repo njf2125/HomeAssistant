@@ -14,7 +14,7 @@ Weather:
 
 Nest:
   entities:
-#    - climate.family_room
+    - climate.family_room
     - sensor.family_room_thermostat_temperature
 #    - sensor.family_room_thermostat_target
     - sensor.family_room_thermostat_humidity

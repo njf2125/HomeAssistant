@@ -41,6 +41,10 @@ recorder:
     domains:
       - device_tracker
 
+duckdns:
+  domain: fignacious
+  access_token: !secret duckdns_token
+
 # Show links to resources in log and frontend
 # introduction:
 

@@ -1,0 +1,7 @@
+appdaemon:
+  plugins:
+    HASS:
+      type: hass
+      ha_url: 127.0.0.1:8123
+      token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiY2RhYTFlMDU2YTI0YzBmYWYwOTBhZDA1OWJiYzY0ZiIsImlhdCI6MTU0NTIyOTk3NSwiZXhwIjoxODYwNTg5OTc1fQ.9GpYO86zbTU8IOiBh5K2prdV6UFpvTc1SsKwou4N8_Q
+  app_dir: /home/homeassistant/.homeassistant/apps
